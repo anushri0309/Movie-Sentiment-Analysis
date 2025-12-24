@@ -10,27 +10,23 @@ with st.sidebar:
     st.markdown("""
     **IMDB Movie Review Sentiment Analysis**
 
-  
     **🔄 Full Pipeline**:
-    1. Kaggle IMDB dataset download
-    2. Text preprocessing (NLTK)
-    3. TF-IDF vectorization (Scikit-learn)
-    4. Train/test split (80/20, stratified)
-    5. Model training & evaluation
+    1. Kaggle IMDB dataset download  
+    2. Text preprocessing (NLTK)  
+    3. TF-IDF vectorization (Scikit-learn)  
+    4. Train/test split (80/20, stratified)  
+    5. Model training & evaluation  
     6. Joblib persistence (production-ready)
 
     **🛠️ Tech Stack**:
-    - Python | Scikit-learn | NLTK
+    - Python | Scikit-learn | NLTK  
     - Streamlit | Joblib | Pandas
-
-    ---
-    st.markdown(
-    "[GitHub repository](https://github.com/anushri0309/Movie-Sentiment-Analysis)"
-)
-
-    [**LinkedIn Post**]()
     """)
 
+    st.markdown(
+        "[GitHub repository](https://github.com/anushri0309/Movie-Sentiment-Analysis)"
+    )
+    st.markdown("[**LinkedIn Post**]()")
 
 # ------------------- LOAD MODELS -------------------
 @st.cache_resource
@@ -49,7 +45,6 @@ def load_models():
 
 model, vectorizer = load_models()
 
-
 # ------------------- CLEAN TEXT FUNCTION -------------------
 def clean_review(text):
     """Match training preprocessing exactly"""
@@ -57,7 +52,6 @@ def clean_review(text):
     text = text.lower()
     text = text.split()
     return " ".join(text)
-
 
 # ------------------- MAIN UI -------------------
 st.set_page_config(
@@ -77,7 +71,11 @@ with col1:
     review = st.text_area(
         "",
         height=250,
-        placeholder="Paste any movie review here...\n\nExample: 'This movie was absolutely wonderful with great acting and a gripping storyline!'"
+        placeholder=(
+            "Paste any movie review here...\n\n"
+            "Example: 'This movie was absolutely wonderful with great acting "
+            "and a gripping storyline!'"
+        )
     )
 
     if st.button("🎭 **Analyze Sentiment**", type="primary", use_container_width=True):
@@ -85,7 +83,9 @@ with col1:
             # Predict
             cleaned = clean_review(review)
             prediction = model.predict(vectorizer.transform([cleaned]))[0]
-            confidence = model.predict_proba(vectorizer.transform([cleaned]))[0].max()
+            confidence = model.predict_proba(
+                vectorizer.transform([cleaned])
+            )[0].max()
 
             # Results
             st.markdown("### **✅ Prediction**")
@@ -115,4 +115,3 @@ with col2:
 
 # Footer
 st.markdown("---")
-
