@@ -24,7 +24,10 @@ with st.sidebar:
     - Streamlit | Joblib | Pandas
 
     ---
-    [**GitHub Repo**](https://github.com/yourusername/sentiment-analysis)
+    st.markdown(
+    "[GitHub repository](https://github.com/anushri0309/Movie-Sentiment-Analysis)"
+)
+
     [**LinkedIn Post**]()
     """)
 
